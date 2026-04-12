@@ -1,0 +1,439 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--or:#F5A623;--bl:#1A3A8F;--bl2:#2952CC;--bg:#EEF2FA;--surf:#fff;--brd:#D1DBF0;--txt:#1A202C;--mut:#64748B;--red:#DC2626;--grn:#16A34A;--amb:#D97706;--or-lt:#FFF3DC;--bl-lt:#EEF4FF;--grn-lt:#F0FDF4;--red-lt:#FEF2F2;--amb-lt:#FFFBEB}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--txt)}
+.wrap{max-width:700px;margin:0 auto;padding:12px 14px 32px}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1A3A8F 0%,#2952CC 100%);border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(245,166,35,.15)}
+.hdr-avatar{width:62px;height:62px;border-radius:50%;object-fit:cover;border:3px solid var(--or);flex-shrink:0;z-index:1}
+.hdr-info{z-index:1}
+.hdr-info h1{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.hdr-info p{font-size:11.5px;color:rgba(255,255,255,.65);margin-top:1px}
+.hdr-clock{margin-left:auto;text-align:right;z-index:1;flex-shrink:0}
+.hdr-clock .t{font-size:22px;font-weight:800;color:var(--or);letter-spacing:1px}
+.hdr-clock .d{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px}
+
+/* STATUS */
+.status{background:var(--surf);border:1.5px solid var(--brd);border-radius:12px;padding:9px 14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut)}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--grn);animation:pls 2s infinite;flex-shrink:0}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ACCORDION CARDS */
+.acc{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surf);border:2px solid var(--brd);border-radius:16px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.card.open{border-color:var(--or);box-shadow:0 4px 20px rgba(245,166,35,.18)}
+.card-hd{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .15s}
+.card-hd:hover{background:#FAFBFF}
+.card.open .card-hd{background:var(--or-lt)}
+.ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ico-red{background:#FEE2E2}.ico-amb{background:#FEF3C7}.ico-blue{background:#DBEAFE}.ico-grn{background:#DCFCE7}.ico-or{background:var(--or-lt)}
+.card-ttl{font-size:14px;font-weight:700;flex:1;line-height:1.3}
+.card-tags{display:flex;gap:4px;margin-top:3px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;display:inline-block}
+.tpw2{background:#DBEAFE;color:#1e40af}.tpw3{background:#EDE9FE;color:#5B21B6}.tgnr{background:#D1FAE5;color:#065F46}.tall{background:#FEF3C7;color:#78350F}
+.arr{font-size:13px;color:var(--mut);transition:transform .2s;flex-shrink:0}
+.card.open .arr{transform:rotate(90deg);color:var(--or)}
+.card-bd{display:none;border-top:2px solid #F0F4FF;padding:16px}
+.card.open .card-bd{display:block}
+
+/* DECISION BUTTONS */
+.q-label{font-size:13px;font-weight:700;color:var(--bl);margin-bottom:7px}
+.q-grp{margin-bottom:12px}
+.q-btns{display:flex;gap:7px;flex-wrap:wrap}
+.qb{background:#F1F5FF;border:2px solid var(--brd);border-radius:10px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:'Nunito',sans-serif;color:var(--txt);line-height:1.2}
+.qb:hover{border-color:var(--or);background:var(--or-lt);color:var(--bl)}
+.qb.sel{background:var(--or);border-color:var(--or);color:#fff;box-shadow:0 3px 10px rgba(245,166,35,.4);transform:translateY(-1px)}
+
+/* RESULT STEPS */
+.rf{display:flex;flex-direction:column;gap:8px;margin-top:6px;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.rs{border-radius:12px;padding:13px 15px;border:1.5px solid}
+.rs.rinfo{background:var(--bl-lt);border-color:#BFDBFE}
+.rs.rreset{background:#F0F4FF;border-color:#C7D7FA}
+.rs.rwarn{background:var(--amb-lt);border-color:#FDE68A}
+.rs.rcr{background:var(--red-lt);border-color:#FECACA}
+.rs.rok{background:var(--grn-lt);border-color:#BBF7D0}
+.rs h4{font-size:13px;font-weight:800;margin-bottom:5px}
+.rinfo h4{color:var(--bl2)}.rreset h4{color:#3730a3}.rwarn h4{color:var(--amb)}.rcr h4{color:var(--red)}.rok h4{color:var(--grn)}
+.rs ol,.rs ul{padding-left:17px;display:flex;flex-direction:column;gap:3px}
+.rs li,.rs p{font-size:12.5px;line-height:1.55;color:var(--txt)}
+.next-lbl{text-align:center;font-size:11px;color:var(--mut);padding:2px 0;font-weight:600}
+.nfb{margin-top:9px;width:100%;background:#fff;border:2px dashed #FECACA;border-radius:9px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;color:#EF4444;text-align:left;transition:all .15s;font-family:'Nunito',sans-serif}
+.nfb:hover{background:var(--red-lt);border-style:solid}
+.note{background:var(--amb-lt);border:1.5px solid #FDE68A;border-radius:9px;padding:10px 13px;font-size:12px;color:#78350F;line-height:1.5;margin-top:8px}
+.note strong{font-weight:800}
+.hidden{display:none!important}
+.sec-lbl{font-size:10.5px;font-weight:800;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+</style>
+
+<div class="wrap">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Sunny — Asistente técnico Windmar Home Códigos Rojos turno madrugada</h2>
+
+<div class="hdr">
+  <img class="hdr-avatar" src="data:image/jpeg;base64,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JM0vPXwiJAFrcBfhLg3G6lrrdRP8A8Fg9NlrTWWmd/ducw+uQvJYk14CzYPyiNtlMbSR17lqueSc5XcqrLUMBLOWUeWxXJlp3McQWkEdQVGlCa8kyqyuXhnc0iR/FKQH+bH4KaXG7UdCQyWTMjjgMbuVWdNJLFLGY3ujc3o4dQtiafEzcEyO5g57nHd3zVvgdS+60eml32VuXg+tbyb7aLRaccB8V8TzxQROllkaxgG5ccBRCbUV0qhilhip4+nMdz+f9FzqrMzu0uFVJUOG+HHDR6BXF3Wqor2Lf9EVkOnzb9z0dC6X6quJdBR5gp+jpehI8lu6JGJqzlGGAMA/NRqaqa7lhjHKzpjpsphoyIC1GfG8zyfkNgoPT8izLy1OT8bJOVVGijSXk7iIi6cpwiIgCIiAIiIAiIgCIiAIiIAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERB//2Q==" alt="Sunny — Asistente Windmar" />
+  <div class="hdr-info">
+    <h1>Sunny</h1>
+    <p>Asistente técnico · Windmar Home · Turno Madrugada</p>
+  </div>
+  <div class="hdr-clock">
+    <div class="t" id="clk">--:--</div>
+    <div class="d" id="dt">---</div>
+  </div>
+</div>
+
+<div class="status">
+  <div class="sdot"></div>
+  <span>Turno activo — selecciona una situación para ver el protocolo</span>
+</div>
+
+<div class="acc" id="acc">
+
+<!-- ======== CASA SIN LUZ ======== -->
+<div class="card" id="c1">
+  <div class="card-hd" onclick="tog('c1')">
+    <div class="ico ico-red">🏠</div>
+    <div style="flex:1">
+      <div class="card-ttl">Casa completamente sin luz</div>
+      <div class="card-tags"><span class="tag tpw2">PW2/PW+</span><span class="tag tpw3">PW3</span><span class="tag tgnr">Generac</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="sec-lbl">Validaciones iniciales</div>
+    <div class="q-grp">
+      <div class="q-label">1. ¿Qué sistema tiene el cliente?</div>
+      <div class="q-btns">
+        <button class="qb" onclick="pick(this,'sys','pw2')">PW2 / PW+</button>
+        <button class="qb" onclick="pick(this,'sys','pw3')">PW3</button>
+        <button class="qb" onclick="pick(this,'sys','gnr')">Generac</button>
+      </div>
+    </div>
+    <div class="q-grp">
+      <div class="q-label">2. ¿Hay servicio de LUMA en el área?</div>
+      <div class="q-btns">
+        <button class="qb" onclick="pick(this,'luma','si')">✅ Sí hay LUMA</button>
+        <button class="qb" onclick="pick(this,'luma','no')">❌ No hay LUMA</button>
+      </div>
+    </div>
+    <div class="q-grp">
+      <div class="q-label">3. ¿La luz LED de la batería está...?</div>
+      <div class="q-btns">
+        <button class="qb" onclick="pick(this,'bat','enc')">🟢 Encendida</button>
+        <button class="qb" onclick="pick(this,'bat','apg')">⚫ Apagada</button>
+      </div>
+    </div>
+    <div id="q4" class="q-grp hidden">
+      <div class="q-label">4. ¿Cuánta carga tiene la batería?</div>
+      <div class="q-btns">
+        <button class="qb" onclick="pick(this,'carga','tiene')">+20% con carga</button>
+        <button class="qb" onclick="pick(this,'carga','cero')">0% / Agotada</button>
+        <button class="qb" onclick="pick(this,'carga','ninfo')">Sin info en PowerHub</button>
+      </div>
+    </div>
+    <div id="res1"></div>
+  </div>
+</div>
+
+<!-- ======== BAJONES ======== -->
+<div class="card" id="c2">
+  <div class="card-hd" onclick="tog('c2')">
+    <div class="ico ico-amb">⚡</div>
+    <div style="flex:1">
+      <div class="card-ttl">Bajones de luz constantes (5+ en una hora)</div>
+      <div class="card-tags"><span class="tag tall">Todos los sistemas</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="rf">
+      <div class="rs rinfo"><h4>Paso 1 — Verificar voltajes</h4><p>Verificar voltajes en <strong>Enphase</strong> o <strong>PowerHub</strong> según el sistema del cliente.</p></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rwarn"><h4>Paso 2 — Bajar Main Breaker</h4><ol><li>Indicar al cliente bajar el <strong>Main Breaker (MB)</strong> del contador.</li><li>Orientar a hacer seguimiento con el MB OFF durante <strong>1 hora</strong>.</li></ol></div>
+      <div class="next-lbl">↓ Después de 1 hora</div>
+      <div class="rs rinfo"><h4>Evaluación</h4><ul><li>✅ <strong>Cesan con MB OFF</strong> → problema de LUMA. Cliente llama a LUMA y genera <strong>querella</strong>.</li><li>❌ <strong>Continúan con MB OFF</strong> → problema del sistema. <strong>Crear CR.</strong></li></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== PARTES SIN LUZ ======== -->
+<div class="card" id="c3">
+  <div class="card-hd" onclick="tog('c3')">
+    <div class="ico ico-blue">💡</div>
+    <div style="flex:1">
+      <div class="card-ttl">Partes de la casa sin luz</div>
+      <div class="card-tags"><span class="tag tall">Todos los sistemas</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="rf">
+      <div class="rs rreset">
+        <h4>Paso 1 — Ciclar breakers del MDP</h4>
+        <ol>
+          <li>Orientar al cliente a ir al <strong>panel principal (MDP)</strong>.</li>
+          <li>Bajar <strong>todos</strong> los breakers del hogar.</li>
+          <li>Subirlos uno por uno de <strong>menor a mayor amperaje</strong>.</li>
+          <li>Identificar cuál breaker se tripea o cae.</li>
+        </ol>
+      </div>
+      <div class="next-lbl">↓ Según lo que encuentre</div>
+      <div class="rs rwarn">
+        <h4>Paso 2 — ¿Dónde está la interconexión?</h4>
+        <p>Una vez identificado el breaker que se tripea, verificar si la <strong>interconexión del sistema está en el MDP</strong> (panel principal del hogar).</p>
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="q-grp">
+        <div class="q-label">¿La cocina está incluida en la parte sin luz?</div>
+        <div class="q-btns">
+          <button class="qb" onclick="pick(this,'coc','si')">Sí, la cocina está incluida</button>
+          <button class="qb" onclick="pick(this,'coc','no')">No, solo otras áreas</button>
+        </div>
+      </div>
+      <div class="q-grp" id="q-interc" style="display:none">
+        <div class="q-label">¿La interconexión está en el MDP / panel principal?</div>
+        <div class="q-btns">
+          <button class="qb" onclick="pick(this,'interc','si')">Sí, está en el MDP</button>
+          <button class="qb" onclick="pick(this,'interc','no')">No, está en el contador</button>
+        </div>
+      </div>
+      <div id="res3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== CHISPAS ======== -->
+<div class="card" id="c4">
+  <div class="card-hd" onclick="tog('c4')">
+    <div class="ico ico-red">🔥</div>
+    <div style="flex:1">
+      <div class="card-ttl">Chispas u olor a quemado en cajas / contador</div>
+      <div class="card-tags"><span class="tag tall">Alta emergencia · Todos los sistemas</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="rf">
+      <div class="rs rwarn"><h4>Paso 1 — Identificar origen</h4><ol><li>Validar con el cliente de dónde proviene el problema.</li><li>Si es <strong>MDP y/o contador</strong> → verificar dónde está la interconexión.</li><li>Si es el <strong>transfer switch</strong> → validar en Site Capture si Windmar lo instaló.</li></ol></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rcr"><h4>Paso 2 — Acción inmediata</h4><ol><li>Si viene de donde está la interconexión (MDP, contador, transfer switch) → bajar el <strong>breaker de protección del gateway</strong> → <strong>Crear CR.</strong></li><li>Si viene de una caja del sistema → bajar el breaker de protección → <strong>Crear CR.</strong></li></ol></div>
+      <div class="note"><strong>⚠️ Caso prioritario y de alta emergencia.</strong> No intentar ningún reset. Proceder directo a CR.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== BK TRIPEADO ======== -->
+<div class="card" id="c5">
+  <div class="card-hd" onclick="tog('c5')">
+    <div class="ico ico-amb">🔌</div>
+    <div style="flex:1">
+      <div class="card-ttl">Breaker de protección tripeado</div>
+      <div class="card-tags"><span class="tag tall">Todos los sistemas</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="rf">
+      <div class="rs rreset"><h4>Paso 1 — Bajar breakers del Backup Gateway</h4><ol><li>Indicar al cliente bajar <strong>todos</strong> los breakers del Backup Gateway.</li></ol></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rwarn"><h4>Paso 2 — Resetear el BK</h4><ol><li>Bajar el BK de protección <strong>hasta el final</strong>.</li><li>Volverlo a subir <strong>con fuerza</strong>.</li></ol></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rinfo"><h4>Verificación</h4><ul><li>✅ <strong>Funciona</strong> → subir los demás breakers del Backup Gateway.</li><li>❌ <strong>Continúa tripeado</strong> → <strong>Crear CR.</strong></li></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SOLAR KIT ======== -->
+<div class="card" id="c6">
+  <div class="card-hd" onclick="tog('c6')">
+    <div class="ico ico-grn">📋</div>
+    <div style="flex:1">
+      <div class="card-ttl">Solar Kit — cotización Código Rojo</div>
+      <div class="card-tags"><span class="tag tall">Pre-Huracán · Zoho</span></div>
+    </div>
+    <div class="arr">▶</div>
+  </div>
+  <div class="card-bd">
+    <div class="rf">
+      <div class="rs rreset"><h4>Paso 1 — Recopilar datos</h4><ol><li>Nombre completo del cliente</li><li>Correo electrónico</li><li>Número de teléfono</li><li>Descripción clara de la situación</li></ol></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rwarn"><h4>Paso 2 — Crear ticket en Zoho</h4><ol><li>Ir a: <strong>999 PRE → Casos 999 → Casos Pre-Huracán</strong></li><li>Crear el ticket con la información recopilada.</li></ol></div>
+      <div class="next-lbl">↓</div>
+      <div class="rs rok"><h4>Paso 3 — Escalar</h4><ol><li>Escalar por <strong>CS & TS (Super Team)</strong>.</li><li>Etiquetar a <strong>Yeraliz Escribano</strong>.</li><li>Indicar: cotización "Código Rojo" para Solar Kit + datos del cliente.</li></ol></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end acc -->
+</div><!-- end wrap -->
+
+<script>
+// Clock
+function tick(){
+  const n=new Date();
+  document.getElementById('clk').textContent=n.toLocaleTimeString('es-PR',{hour:'2-digit',minute:'2-digit',hour12:false});
+  const d=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],m=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  document.getElementById('dt').textContent=`${d[n.getDay()]} ${n.getDate()} ${m[n.getMonth()]}`;
+}
+tick();setInterval(tick,1000);
+
+// Accordion
+function tog(id){
+  const el=document.getElementById(id),was=el.classList.contains('open');
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('open'));
+  if(!was){el.classList.add('open');}
+  resetC1();resetC3();
+}
+
+// State
+const S={sys:null,luma:null,bat:null,carga:null,coc:null,interc:null};
+
+function pick(btn,k,v){
+  btn.closest('.q-btns').querySelectorAll('.qb').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  S[k]=v;
+  if(k==='bat'){
+    document.getElementById('q4').classList.toggle('hidden',v!=='enc');
+    if(v!=='enc'){S.carga=null;document.querySelectorAll('#q4 .qb').forEach(b=>b.classList.remove('sel'));}
+  }
+  if(k==='coc'){
+    document.getElementById('q-interc').style.display='block';
+    S.interc=null;document.querySelectorAll('#q-interc .qb').forEach(b=>b.classList.remove('sel'));
+    document.getElementById('res3').innerHTML='';
+  }
+  if(k==='sys'||k==='luma'||k==='bat'||k==='carga') evalC1();
+  if(k==='interc') evalC3();
+}
+
+function resetC1(){Object.assign(S,{sys:null,luma:null,bat:null,carga:null});document.querySelectorAll('#c1 .qb').forEach(b=>b.classList.remove('sel'));document.getElementById('q4').classList.add('hidden');document.getElementById('res1').innerHTML='';}
+function resetC3(){Object.assign(S,{coc:null,interc:null});document.querySelectorAll('#c3 .qb').forEach(b=>b.classList.remove('sel'));document.getElementById('q-interc').style.display='none';document.getElementById('res3').innerHTML='';}
+
+// ===================== FLOWS =====================
+const F={
+pw2_si_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW2/PW+ · Hay LUMA · Batería encendida con carga. LUMA no está ingresando a la residencia.</p></div>
+<div class="next-lbl">↓ 1.er intento</div>
+<div class="rs rreset" id="f_s1"><h4>Reset de Contactor</h4><ol><li>Bajar cargas del MDP (menor a mayor amperaje).</li><li><strong>GT2:</strong> bajar pestaña "Service Only" → girar contactor a la derecha.</li><li><strong>GT1:</strong> remover sello "Manual Override" → mover contactor a la izquierda.</li><li>Subir cargas de menor amperaje y verificar si hay luz.</li><li>Si funciona → orientar a subir el resto en 1 hora.</li></ol>
+<button class="nfb" onclick="nx('nf1')">❌ No funcionó → siguiente paso</button></div>
+<div id="nf1" class="hidden"><div class="next-lbl">↓ 2.do intento</div>
+<div class="rs rreset"><h4>Reset de Batería</h4><ol><li>Verificar que switch de batería esté en "I".</li><li>Confirmar luz LED verde (costado derecho).</li><li>Bajar cargas del MDP.</li><li>Apagar y encender la batería.</li><li>Subir cargas de menor amperaje y verificar.</li><li>Si funciona → orientar a subir resto en 1 hora.</li></ol>
+<button class="nfb" onclick="nx('nf2')">❌ No funcionó → siguiente paso</button></div></div>
+<div id="nf2" class="hidden"><div class="next-lbl">↓ 3.er intento</div>
+<div class="rs rreset"><h4>Reset de Gateway</h4><ol><li>Bajar cargas del MDP.</li><li><strong>GT2:</strong> lápiz en agujero superior, mantener 10-15 seg.</li><li><strong>GT1:</strong> lápiz en agujero mitad derecha, mantener 10-15 seg.</li><li>Esperar que luz quede fija (máx. 5 min).</li><li>Subir breakers de menor amperaje y verificar.</li></ol>
+<button class="nfb" onclick="nx('nf3')">❌ No funcionó → crear CR</button></div></div>
+<div id="nf3" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear Código Rojo (CR)</h4><p>Se agotaron todos los resets disponibles. Crear CR con descripción de lo realizado.</p></div></div></div>`,
+
+pw2_si_apg_x:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW2/PW+ · Hay LUMA · Batería apagada. Solo se puede intentar el ingreso de LUMA mediante reset de contactor. No se recomienda manipular la batería.</p></div>
+<div class="next-lbl">↓ Único reset disponible</div>
+<div class="rs rreset"><h4>Reset de Contactor</h4><ol><li>Bajar cargas del MDP.</li><li><strong>GT2:</strong> bajar pestaña "Service Only" → girar contactor a la derecha.</li><li><strong>GT1:</strong> remover sello "Manual Override" → mover contactor a la izquierda.</li><li>Subir cargas de menor amperaje y verificar ingreso de LUMA.</li></ol>
+<button class="nfb" onclick="nx('nf1b')">❌ No funcionó → crear CR</button></div>
+<div id="nf1b" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear Código Rojo (CR)</h4><p>LUMA no ingresa y la batería está apagada. No hay más resets sin manipular la batería. Crear CR.</p></div></div></div>`,
+
+pw2_no_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW2/PW+ · Sin LUMA · Batería encendida con carga. Se intenta que la batería energice la casa.</p></div>
+<div class="next-lbl">↓ 1.er intento</div>
+<div class="rs rreset"><h4>Reset de Batería</h4><ol><li>Verificar switch en "I".</li><li>Bajar cargas del MDP.</li><li>Apagar y encender la batería.</li><li>Subir cargas de menor amperaje y verificar.</li><li>Si funciona → orientar a subir el resto en 1 hora.</li></ol>
+<button class="nfb" onclick="nx('pw2no1')">❌ No funcionó → siguiente paso</button></div>
+<div id="pw2no1" class="hidden"><div class="next-lbl">↓ 2.do intento</div>
+<div class="rs rreset"><h4>Reset de Gateway</h4><ol><li>Bajar cargas del MDP.</li><li><strong>GT2:</strong> lápiz en agujero superior, 10-15 seg.</li><li><strong>GT1:</strong> lápiz en agujero mitad derecha, 10-15 seg.</li><li>Esperar luz fija o 5 min.</li><li>Subir breakers de menor amperaje y verificar.</li></ol>
+<button class="nfb" onclick="nx('pw2no2')">❌ No funcionó → crear CR</button></div></div>
+<div id="pw2no2" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear Código Rojo (CR)</h4><p>Resets agotados sin LUMA disponible. Crear CR.</p></div></div></div>`,
+
+pw2_no_apg_tiene:`<div class="rf"><div class="rs rwarn"><h4>Situación</h4><p>PW2/PW+ · Sin LUMA · Batería apagada con +20% de carga registrada.</p></div><div class="rs rcr" style="margin-top:8px"><h4>Crear CR</h4><p>Especificar en el CR: <strong>batería de 12V para jumpeo</strong>. La batería tiene carga pero no enciende sola.</p></div></div>`,
+
+pw2_no_apg_cero:`<div class="rf"><div class="rs rok"><h4>Sin LUMA · Batería al 0% o agotada</h4><p>No aplica reset. No aplica CR. La batería no tiene energía. El cliente debe <strong>esperar carga solar al amanecer</strong>. Dar seguimiento para validar activación.</p></div></div>`,
+
+pw2_no_apg_ninfo:`<div class="rf"><div class="rs rwarn"><h4>Sin información en PowerHub</h4><p>No hay datos del porcentaje real de la batería.</p></div><div class="rs rcr" style="margin-top:8px"><h4>Crear CR</h4><p>Sin información del estado de la batería, se procede con CR.</p></div></div>`,
+
+pw3_si_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW3 · Hay LUMA · Batería encendida. Los resets PW3 pueden activar batería o LUMA. No se bajan cargas del MDP.</p></div>
+<div class="next-lbl">↓ 1.er intento</div>
+<div class="rs rreset"><h4>Reset de Batería PW3</h4><ol><li>Ubicar batería leader (con luz LED).</li><li>Lateral izquierdo: levantar tapa → botón de encendido.</li><li>Apagar y encender (reinicia batería e inversor).</li><li>Esperar luz blanca → cambia a azul.</li><li>Verificar si la casa quedó con luz.</li></ol>
+<button class="nfb" onclick="nx('pw3s1')">❌ No funcionó → siguiente paso</button></div>
+<div id="pw3s1" class="hidden"><div class="next-lbl">↓ 2.do intento</div>
+<div class="rs rreset"><h4>Reset de Gateway PW3</h4><ol><li>Un solo botón visible en el gateway.</li><li>Mantener presionado <strong>15 segundos</strong>.</li><li>Esperar luz azul.</li><li>Verificar si la casa quedó con luz.</li></ol>
+<button class="nfb" onclick="nx('pw3s2')">❌ No funcionó → crear CR</button></div></div>
+<div id="pw3s2" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear CR</h4><p>Resets PW3 agotados. Crear CR.</p></div></div></div>`,
+
+pw3_si_apg_x:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW3 · Hay LUMA · Batería apagada. No se recomienda manipular la batería directamente. Se intenta reset de gateway para que ingrese LUMA.</p></div>
+<div class="next-lbl">↓ Único reset recomendado</div>
+<div class="rs rreset"><h4>Reset de Gateway PW3</h4><ol><li>Un solo botón visible en el gateway.</li><li>Mantener presionado <strong>15 segundos</strong>.</li><li>Esperar luz azul.</li><li>Verificar si la casa quedó con luz (ingreso de LUMA o batería).</li></ol>
+<button class="nfb" onclick="nx('pw3sa1')">❌ No funcionó → crear CR</button></div>
+<div id="pw3sa1" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear CR</h4><p>LUMA no ingresó y batería está apagada. Crear CR.</p></div></div></div>`,
+
+pw3_no_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>PW3 · Sin LUMA · Batería encendida con carga. No se bajan cargas del MDP.</p></div>
+<div class="next-lbl">↓ 1.er intento</div>
+<div class="rs rreset"><h4>Reset de Batería PW3</h4><ol><li>Ubicar batería leader (con luz LED).</li><li>Lateral izquierdo: levantar tapa → botón de encendido.</li><li>Apagar y encender.</li><li>Esperar luz blanca → azul.</li><li>Verificar si la casa quedó con luz.</li></ol>
+<button class="nfb" onclick="nx('pw3n1')">❌ No funcionó → siguiente paso</button></div>
+<div id="pw3n1" class="hidden"><div class="next-lbl">↓ 2.do intento</div>
+<div class="rs rreset"><h4>Reset de Gateway PW3</h4><ol><li>Botón único en el gateway.</li><li>Mantener 15 segundos.</li><li>Esperar luz azul y verificar.</li></ol>
+<button class="nfb" onclick="nx('pw3n2')">❌ No funcionó → crear CR</button></div></div>
+<div id="pw3n2" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear CR</h4><p>Si batería estaba apagada antes de los resets, también aplica CR.</p></div></div></div>`,
+
+pw3_no_apg_cero:`<div class="rf"><div class="rs rok"><h4>PW3 · Sin LUMA · 0% o agotada</h4><p>No aplica reset. El sistema PW3 puede activarse con energía solar al amanecer. Cliente espera. Dar seguimiento.</p></div></div>`,
+pw3_no_apg_ninfo:`<div class="rf"><div class="rs rcr"><h4>Sin info en PowerHub → Crear CR</h4></div></div>`,
+pw3_no_apg_tiene:`<div class="rf"><div class="rs rwarn"><h4>PW3 · Sin LUMA · Batería apagada con carga</h4><p>Batería apagada pero tiene porcentaje. En PW3 el sistema puede activarse con el sol. Orientar al cliente a esperar y monitorear. Si el % es mayor al 20%, se puede generar CR.</p></div></div>`,
+
+gnr_si_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>Generac · Hay LUMA · Batería con carga. El reset Generac solo permite ingreso de batería. No existe reset que ingrese LUMA directamente.</p></div>
+<div class="next-lbl">↓ 1.er intento</div>
+<div class="rs rreset"><h4>Reset de Batería Generac</h4><ol><li>Bajar cargas del MDP.</li><li>Apagar y encender el botón superior izquierdo de la batería <strong>4 veces</strong>.</li><li>Subir cargas de menor amperaje.</li><li>Verificar si la casa quedó con luz.</li></ol>
+<button class="nfb" onclick="nx('gnrs1')">❌ No funcionó → siguiente paso</button></div>
+<div id="gnrs1" class="hidden">
+<div class="next-lbl">↓ Si funcionó</div>
+<div class="rs rok"><h4>Generar TK verificación LUMA</h4><p>La batería ingresó pero LUMA no está entrando al sistema. Generar ticket de verificación del sistema LUMA.</p></div>
+<div class="next-lbl">↓ Si no funcionó</div>
+<div class="rs rcr"><h4>Crear CR</h4><p>Reset de batería no funcionó. Crear CR.</p></div></div></div>`,
+
+gnr_si_apg_x:`<div class="rf"><div class="rs rwarn"><h4>Generac · Hay LUMA · Batería apagada</h4><p>En Generac no existe reset que permita ingreso de LUMA. Sin batería y sin ingreso de LUMA al sistema.</p></div><div class="rs rcr" style="margin-top:8px"><h4>Crear CR</h4></div></div>`,
+
+gnr_no_enc_tiene:`<div class="rf">
+<div class="rs rinfo"><h4>Situación</h4><p>Generac · Sin LUMA · Batería con carga. Solo se puede intentar ingreso de batería.</p></div>
+<div class="rs rreset" style="margin-top:8px"><h4>Reset de Batería Generac</h4><ol><li>Bajar cargas del MDP.</li><li>Apagar y encender botón superior izquierdo <strong>4 veces</strong>.</li><li>Subir cargas de menor amperaje.</li><li>Verificar si la casa quedó con luz.</li></ol>
+<button class="nfb" onclick="nx('gnrn1')">❌ No funcionó → crear CR</button></div>
+<div id="gnrn1" class="hidden"><div class="next-lbl">↓</div><div class="rs rcr"><h4>Crear CR</h4></div></div></div>`,
+
+gnr_no_apg_x:`<div class="rf"><div class="rs rwarn"><h4>Generac · Sin LUMA · Batería apagada</h4><p>Sin LUMA y sin batería disponible. El reset Generac solo activa batería y está apagada.</p></div><div class="rs rcr" style="margin-top:8px"><h4>Crear CR</h4></div></div>`
+};
+
+function evalC1(){
+  const{sys,luma,bat,carga}=S,r=document.getElementById('res1');
+  if(!sys||!luma||!bat){r.innerHTML='';return;}
+  if(bat==='enc'&&!carga){r.innerHTML='';return;}
+  let k='';
+  if(sys==='pw2'){
+    if(luma==='si') k=bat==='enc'?'pw2_si_enc_tiene':'pw2_si_apg_x';
+    else{ if(bat==='enc') k='pw2_no_enc_tiene'; else k=carga==='tiene'?'pw2_no_apg_tiene':carga==='cero'?'pw2_no_apg_cero':'pw2_no_apg_ninfo';}
+  }else if(sys==='pw3'){
+    if(luma==='si') k=bat==='enc'?'pw3_si_enc_tiene':'pw3_si_apg_x';
+    else{ if(bat==='enc') k='pw3_no_enc_tiene'; else k=carga==='cero'?'pw3_no_apg_cero':carga==='tiene'?'pw3_no_apg_tiene':'pw3_no_apg_ninfo';}
+  }else{
+    if(luma==='si') k=bat==='enc'?'gnr_si_enc_tiene':'gnr_si_apg_x';
+    else k=bat==='enc'?'gnr_no_enc_tiene':'gnr_no_apg_x';
+  }
+  r.innerHTML=F[k]||'';
+}
+
+function evalC3(){
+  const{coc,interc}=S,r=document.getElementById('res3');
+  if(!coc||!interc){r.innerHTML='';return;}
+  if(coc==='si'&&interc==='si'){
+    r.innerHTML=`<div class="rf"><div class="rs rcr"><h4>Crear Código Rojo (CR)</h4><p>La cocina está incluida y la interconexión está en el MDP. Es una emergencia. Se procede con <strong>Código Rojo.</strong></p></div></div>`;
+  }else if(coc==='si'&&interc==='no'){
+    r.innerHTML=`<div class="rf"><div class="rs rwarn"><h4>No aplica CR</h4><p>La cocina está incluida pero la interconexión <strong>no está en el MDP</strong> (está en el contador). Windmar Home no puede intervenir. El cliente debe validar con un <strong>perito electricista</strong> si el sistema lleva más de un mes instalado.</p></div></div>`;
+  }else if(coc==='no'&&interc==='si'){
+    r.innerHTML=`<div class="rf"><div class="rs rok"><h4>Ticket Regular</h4><p>La cocina no está incluida e interconexión está en el MDP. Windmar puede trabajarlo como un <strong>ticket regular</strong> (no CR).</p></div></div>`;
+  }else{
+    r.innerHTML=`<div class="rf"><div class="rs rwarn"><h4>Windmar no interviene</h4><p>La cocina no está incluida y la interconexión <strong>no está en el MDP</strong>. Si lleva más de un mes instalado, el cliente debe contactar a un <strong>perito electricista</strong>. Windmar Home no se responsabiliza.</p></div></div>`;
+  }
+}
+
+function nx(id){const e=document.getElementById(id);if(e){e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'nearest'});}}
+</script>
